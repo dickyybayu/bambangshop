@@ -65,11 +65,11 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement unsubscribe function in Notification controller.`
     -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
-    -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
-    -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
-    -   [ ] Commit: `Implement publish function in Program service and Program controller.`
-    -   [ ] Commit: `Edit Product service methods to call notify after create/delete.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+    -   [x] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
+    -   [x] Commit: `Implement notify function in Notification service to notify each Subscriber.`
+    -   [x] Commit: `Implement publish function in Program service and Program controller.`
+    -   [x] Commit: `Edit Product service methods to call notify after create/delete.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 This is the place for you to write reflections:
@@ -107,3 +107,21 @@ This is the place for you to write reflections:
     Postman is a powerful tool for testing APIs, making it easier to verify whether our endpoints function correctly. In this project, Postman allows us to send requests, inspect responses, and debug API behavior without needing to build a frontend or use curl commands manually. Useful features include collections (organizing API requests), environment variables (for dynamic values), and test scripts (automating request validation). These features are valuable not only for this project but also for future group projects, as they improve collaboration, testing efficiency, and API documentation.
     
 #### Reflection Publisher-3
+
+1. Observer Pattern has two variations: Push model (publisher pushes data to subscribers) and Pull model (subscribers pull data from publisher). In this tutorial case, which variation of Observer Pattern that we use?
+
+    In this tutorial case, we use the Push Model of the Observer Pattern. The NotificationService::notify method automatically sends updates to all subscribers whenever a relevant event occurs. Subscribers do not request updates but instead receive notifications as soon as a product's status changes. This is evident in the use of the thread::spawn function, which ensures that each subscriber receives the notification immediately without having to request it.
+
+2. What are the advantages and disadvantages of using the other variation of Observer Pattern for this tutorial case? (example: if you answer Q1 with Push, then imagine if we used Pull)
+
+    If we were to use the Pull Model instead of the Push Model, the subscribers would need to periodically request updates from the publisher instead of receiving notifications automatically.
+
+    One advantage of the Pull Model is that it gives subscribers more control over when they receive updates, reducing unnecessary notifications if they are not interested in frequent updates. This can also help with load management, as the system does not need to push updates to all subscribers immediately. Additionally, it avoids sending redundant data if the subscriber does not need constant updates.
+
+    However, there are significant disadvantages in this tutorial case. The Pull Model would require each subscriber to implement polling mechanisms, meaning they would need to make repeated requests to check for new updates, increasing network traffic and server load. This approach can also introduce delays in receiving important notifications, as subscribers may not check frequently enough. In contrast, the Push Model ensures that subscribers receive updates in real-time, making it more efficient for event-driven notifications, such as new product updates.
+
+3. Explain what will happen to the program if we decide to not use multi-threading in the notification process.
+
+    If we decide not to use multi-threading in the notification process, the program's performance and responsiveness would be significantly affected. Currently, the program spawns a new thread for each subscriber when sending notifications, allowing multiple notifications to be processed concurrently. This ensures that the main execution flow remains responsive and does not block other operations.
+
+    Without multi-threading, the notification process would become sequential, meaning that each subscriber would be notified one by one in a blocking manner. If there are many subscribers, this could lead to significant delays, especially if some subscribers have slow response times or network issues. The entire system could become sluggish, and if notifications take too long, other parts of the application (such as handling new product requests or managing subscriptions) might also experience delays.
