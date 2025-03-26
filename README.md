@@ -58,12 +58,12 @@ You can install Postman via this website: https://www.postman.com/downloads/
     -   [x] Commit: `Implement delete function in Subscriber repository.`
     -   [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 -   **STAGE 2: Implement services and controllers**
-    -   [ ] Commit: `Create Notification service struct skeleton.`
-    -   [ ] Commit: `Implement subscribe function in Notification service.`
-    -   [ ] Commit: `Implement subscribe function in Notification controller.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification service.`
-    -   [ ] Commit: `Implement unsubscribe function in Notification controller.`
-    -   [ ] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
+    -   [x] Commit: `Create Notification service struct skeleton.`
+    -   [x] Commit: `Implement subscribe function in Notification service.`
+    -   [x] Commit: `Implement subscribe function in Notification controller.`
+    -   [x] Commit: `Implement unsubscribe function in Notification service.`
+    -   [x] Commit: `Implement unsubscribe function in Notification controller.`
+    -   [x] Write answers of your learning module's "Reflection Publisher-2" questions in this README.
 -   **STAGE 3: Implement notification mechanism**
     -   [ ] Commit: `Implement update method in Subscriber model to send notification HTTP requests.`
     -   [ ] Commit: `Implement notify function in Notification service to notify each Subscriber.`
@@ -94,4 +94,16 @@ This is the place for you to write reflections:
 
 #### Reflection Publisher-2
 
+1. In the Model-View Controller (MVC) compound pattern, there is no “Service” and “Repository”. Model in MVC covers both data storage and business logic. Explain based on your understanding of design principles, why we need to separate “Service” and “Repository” from a Model?
+
+    In the traditional MVC pattern, the Model is responsible for both business logic and data storage. However, separating Service and Repository enhances maintainability, scalability, and modularity. The Repository layer abstracts database interactions, ensuring that the persistence logic is separate from business logic. Meanwhile, the Service layer handles business rules, making the code more organized and reusable. This separation follows the Single Responsibility Principle (SRP), preventing the Model from becoming too complex and tightly coupled to database operations.
+
+2. What happens if we only use the Model? Explain your imagination on how the interactions between each model (Program, Subscriber, Notification) affect the code complexity for each model?
+
+    If we only use the Model without Service and Repository layers, it would lead to tightly coupled code, making changes more difficult. For example, interactions between Program, Subscriber, and Notification would be handled directly in the Model, leading to excessive dependencies. This would increase complexity, as each Model would need to handle database queries, business logic, and data manipulation in the same place. As the application grows, modifying one part of the system could introduce unintended side effects, making maintenance and debugging more difficult.
+
+3. Have you explored more about Postman? Tell us how this tool helps you to test your current work. You might want to also list which features in Postman you are interested in or feel like it is helpful to help your Group Project or any of your future software engineering projects.
+
+    Postman is a powerful tool for testing APIs, making it easier to verify whether our endpoints function correctly. In this project, Postman allows us to send requests, inspect responses, and debug API behavior without needing to build a frontend or use curl commands manually. Useful features include collections (organizing API requests), environment variables (for dynamic values), and test scripts (automating request validation). These features are valuable not only for this project but also for future group projects, as they improve collaboration, testing efficiency, and API documentation.
+    
 #### Reflection Publisher-3
